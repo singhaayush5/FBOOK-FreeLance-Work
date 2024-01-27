@@ -1,0 +1,11 @@
+/* src/app/navbar/navbar.component.css */
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+span {
+  margin-left: 10px;
+  font-size: 20px;
+}

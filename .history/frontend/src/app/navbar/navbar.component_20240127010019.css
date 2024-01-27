@@ -1,0 +1,44 @@
+/* src/app/navbar/navbar.component.css */
+.navbar {
+  background-color: #3f51b5; /* Primary color or your preferred color */
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 24px;
+  color: white;
+}
+
+.icon {
+  display: inline-block;
+  font-size: 24px;
+}
+
+.app-title {
+  font-size: 20px;
+}
+
+.custom-button {
+  background-color: green;
+  color: white;
+  padding: 8px 16px;
+}
+
+.buttonGrp {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Align items vertically in the middle */
+}
+
+.buttonGrp button {
+    color :"white"
+  margin-left: 10px; /* Add margin between buttons */
+}
