@@ -44,7 +44,7 @@ dotenv.config({ path: "./.env" });
 ConnectDB();
 
 // To Load The routers
-// app.use("/", require("./routes/router.jsx"));
+app.use("/", require("./routes/router.jsx"));
 
 app.get("/", (req, res) => {
   res.send("This is the backend of FBook");
