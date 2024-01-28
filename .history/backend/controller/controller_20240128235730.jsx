@@ -102,7 +102,7 @@ exports.editUser = async (req, res) => {
         .json({ error: "Email, DOB, and password are required" });
     }
 
-    const existingUser = await Auth.findOne({ email, DOB });
+    const existingUser = await StudentLogin.findOne({ email, DOB });
 
     if (!existingUser) {
       return res

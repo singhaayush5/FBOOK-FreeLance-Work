@@ -94,31 +94,37 @@ exports.forgotUser = async (req, res) => {
 };
 exports.editUser = async (req, res) => {
   try {
-    const { email, DOB, password } = req.body;
-
-    if (!email || !DOB || !password) {
-      return res
-        .status(400)
-        .json({ error: "Email, DOB, and password are required" });
+    const { name, email, phone, roll, branch } = req.body;
+    if (!roll) {
+      return res.status(400).json({ error: "Roll is required" });
     }
 
-    const existingUser = await Auth.findOne({ email, DOB });
-
+    const existingUser = await StudentLogin.findOne({ roll: roll });
     if (!existingUser) {
       return res
         .status(404)
-        .json({ message: "User not found or invalid credentials" });
+        .json({ message: `User with roll ${roll} not found` });
     }
 
-    // Update the password
-    existingUser.password = password;
+    // Update only the fields that are provided in the request
+    if (name) {
+      existingUser.name = name;
+    }
+    if (phone) {
+      existingUser.phone = phone;
+    }
+    if (email) {
+      existingUser.email = email;
+    }
+    if (branch) {
+      existingUser.branch = branch;
+    }
 
     const done = await existingUser.save();
-
     if (done) {
-      return res.status(200).json({ message: "Password updated successfully" });
+      return res.status(200).json({ message: "Edits Done" });
     } else {
-      return res.status(400).json({ error: "Password not updated" });
+      return res.status(400).json({ error: "Not Edited" });
     }
   } catch (err) {
     console.error(err);
