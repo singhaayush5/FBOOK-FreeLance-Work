@@ -28,7 +28,7 @@ export class EditUserComponent {
     this.editForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       DOB: ['', Validators.required],
-      password: ['', Validators.required],
+      passowrd: ['', Validators.required],
     });
   }
 
@@ -67,7 +67,7 @@ export class EditUserComponent {
           (error) => {
             console.log(error);
             Swal.fire({
-              title: 'Updation not Done',
+              title: 'Updation not done',
               text: 'Please enter valid details',
               icon: 'error',
               confirmButtonText: 'Retry',

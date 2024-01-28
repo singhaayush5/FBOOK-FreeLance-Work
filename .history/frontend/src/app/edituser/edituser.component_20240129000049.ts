@@ -1,34 +1,23 @@
 import { Component } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { Router } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import Swal from 'sweetalert2';
 
-const yourServerURL = 'http://localhost:8080';
 @Component({
   selector: 'app-edituser',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [],
   templateUrl: './edituser.component.html',
   styleUrl: './edituser.component.css',
 })
-export class EditUserComponent {
-  editForm: FormGroup;
+export class ForgotpassComponent {
+  forgotForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient
   ) {
-    this.editForm = this.fb.group({
+    this.forgotForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       DOB: ['', Validators.required],
-      password: ['', Validators.required],
     });
   }
 
@@ -37,7 +26,7 @@ export class EditUserComponent {
   }
 
   handleFormSubmit(): void {
-    const dobValue = this.editForm.get('DOB')?.value;
+    const dobValue = this.forgotForm.get('DOB')?.value;
 
     if (dobValue !== undefined) {
       const dobDate = new Date(dobValue);
@@ -50,14 +39,14 @@ export class EditUserComponent {
       const formattedDOB = `${day}-${month}-${year}`;
 
       this.http
-        .patch<any>(`${yourServerURL}/api/editUser`, {
-          ...this.editForm.value,
+        .post<any>(`${yourServerURL}/api/forgotUser`, {
+          ...this.forgotForm.value,
           DOB: formattedDOB,
         })
         .subscribe(
           (data) => {
             Swal.fire({
-              title: 'Updation Sucessfull',
+              title: 'User Found',
               icon: 'success',
               timer: 1000,
             }).then(() => {
@@ -67,7 +56,7 @@ export class EditUserComponent {
           (error) => {
             console.log(error);
             Swal.fire({
-              title: 'Updation not Done',
+              title: 'Bad Credentials',
               text: 'Please enter valid details',
               icon: 'error',
               confirmButtonText: 'Retry',

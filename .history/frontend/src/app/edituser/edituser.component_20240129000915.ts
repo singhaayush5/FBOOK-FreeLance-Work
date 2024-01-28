@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import {
   FormGroup,
   FormBuilder,
@@ -7,7 +8,6 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import Swal from 'sweetalert2';
 
 const yourServerURL = 'http://localhost:8080';
 @Component({
@@ -28,7 +28,6 @@ export class EditUserComponent {
     this.editForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       DOB: ['', Validators.required],
-      password: ['', Validators.required],
     });
   }
 
@@ -50,14 +49,14 @@ export class EditUserComponent {
       const formattedDOB = `${day}-${month}-${year}`;
 
       this.http
-        .patch<any>(`${yourServerURL}/api/editUser`, {
+        .post<any>(`${yourServerURL}/api/editUser`, {
           ...this.editForm.value,
           DOB: formattedDOB,
         })
         .subscribe(
           (data) => {
             Swal.fire({
-              title: 'Updation Sucessfull',
+              title: 'User Found',
               icon: 'success',
               timer: 1000,
             }).then(() => {
@@ -67,7 +66,7 @@ export class EditUserComponent {
           (error) => {
             console.log(error);
             Swal.fire({
-              title: 'Updation not Done',
+              title: 'Bad Credentials',
               text: 'Please enter valid details',
               icon: 'error',
               confirmButtonText: 'Retry',

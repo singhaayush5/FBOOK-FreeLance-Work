@@ -28,7 +28,7 @@ export class EditUserComponent {
     this.editForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       DOB: ['', Validators.required],
-      password: ['', Validators.required],
+      passowrd: ['', Validators.required],
     });
   }
 
